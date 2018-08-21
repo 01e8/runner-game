@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="golubev">
+    <link rel="icon" href="desimg/iconn/ico8.ico">
+    <link type="text/css" href="style.css" rel="stylesheet">
+    <title>Pokrovitel GAME</title>
+
+</head>
+<body>
+    <div id="backgr">
+    </div>
+    <div id="ground">
+    </div>
+    <div id="player">
+    </div>
+    <div class="pregr" id="n1">
+    </div>
+    <div class="pregr" id="n2">
+    </div>
+    <div class="pregr" id="n3">
+    </div>
+    <div class="pregr" id="n4">
+    </div>
+    <div class="pregr" id="n5">
+    </div>
+    <div class="pregr" id="n6">
+    </div>
+    <div class="pregr" id="n7">
+    </div>
+    <div class="pregr" id="n8">
+    </div>
+    <div class="pregr" id="n9">
+    </div>
+    <div class="pregr" id="n10">
+    </div>
+
+     
+    <script type="text/javascript">
+        var fps = 60;
+        var life = 1;
+        var step = 65;
+        var player = document.getElementById("player");
+        var plY = 46;
+        var plX = 25;
+        var plH = 18;
+        var plW = 10;
+        var plAniJump = 0;
+        var plAniSlid = 0;
+        var n1 = document.getElementById("n1");
+        var n2 = document.getElementById("n2");
+        var n3 = document.getElementById("n3");
+        var n4 = document.getElementById("n4");
+        var n5 = document.getElementById("n5");
+        var n6 = document.getElementById("n6");
+        var n7 = document.getElementById("n7");
+        var n8 = document.getElementById("n8");
+        var n9 = document.getElementById("n9");
+        var n10 = document.getElementById("n10");
+        var n1left = ((step*3)-20)+(step*0);
+        var n2left = ((step*3)-20)+(step*1);
+        var n3left = ((step*3)-20)+(step*2);
+        var n4left = ((step*3)-20)+(step*3);
+        var n5left = ((step*3)-20)+(step*4);
+        var n6left = ((step*3)-20)+(step*5);
+        var n7left = ((step*3)-20)+(step*6);
+        var n8left = ((step*3)-20)+(step*7);
+        var n9left = ((step*3)-20)+(step*8);
+        var n10left = ((step*3)-20)+(step*9);
+        var n1top = changeposY();
+        var n2top = changeposY();
+        var n3top = changeposY();
+        var n4top = changeposY();
+        var n5top = changeposY();
+        var n6top = changeposY();
+        var n7top = changeposY();
+        var n8top = changeposY();
+        var n9top = changeposY();
+        var n10top = changeposY();
+        var n1XX = changeposX();
+        var n2XX = changeposX();
+        var n3XX = changeposX();
+        var n4XX = changeposX();
+        var n5XX = changeposX();
+        var n6XX = changeposX();
+        var n7XX = changeposX();
+        var n8XX = changeposX();
+        var n9XX = changeposX();
+        var n10XX = changeposX();
+        
+        function moveRectDOWN(e) {
+            switch (e.keyCode) {
+            case 38:   // если нажата клавиша вверх
+                if ((plY >= 46) && (plAniSlid == 0)) {
+                    plAniJump = 1;
+                    plY = 46;
+                }
+                break;
+            case 40:   // если нажата клавиша вниз
+                plAniJump = 0;
+                plAniSlid = 1;
+                plY = 54;
+                plH = 10;
+                plW = 18;
+                player.style.marginTop = plY + "vh";
+                player.style.height = plH + "vh";
+                player.style.width = plW + "vh";
+                break;
+            }
+        }
+        function moveRectUP(z) {
+            switch (z.keyCode) {
+            case 40:   // если разжата клавиша вниз
+                plAniSlid = 0;
+                plY = 46;
+                plH = 18;
+                plW = 10;
+                player.style.marginTop = plY + "vh";
+                player.style.height = plH + "vh";
+                player.style.width = plW + "vh";
+                break;
+            }
+        }
+        
+        addEventListener("keydown", moveRectDOWN);
+        addEventListener("keyup", moveRectUP);
+        
+        
+        function changeposY(){
+            switch(Math.floor(Math.random() * 2)) {
+                case 0:
+                    var pos = 54;
+                    break;
+                case 1:
+                    var pos = 44;
+                    break;
+            } 
+            return pos;
+        }
+        
+        function changeposX(){
+            return (Math.floor(Math.random() * 11)-5);
+        }
+        
+        var timer = setInterval(function() {
+            if (life == 1) {
+                if (plAniJump == 2) {
+                    if (plY <= 46){
+                        plY=plY+((plY-28)/8);
+                    }
+                    if (plY >= 46){
+                        plAniJump = 0;
+                        plY=46;
+                    }
+                    player.style.marginTop = plY + "vh";
+                }
+                if (plAniJump == 1) {
+                    if (plY >= 30){
+                        plY=plY-((plY-28)/8);
+                    }
+                    if (plY <= 30){
+                        plAniJump = 2;
+                    }
+                    player.style.marginTop = plY + "vh";
+                }
+                
+                if (n1left < -20) {
+                    n1left = ((step*10)-20);
+                    n1top = changeposY();
+                    n1XX = changeposX();
+                }
+                if (n2left < -20) {
+                    n2left = ((step*10)-20);
+                    n2top = changeposY();
+                    n2XX = changeposX();
+                }
+                if (n3left < -20) {
+                    n3left = ((step*10)-20);
+                    n3top = changeposY();
+                    n3XX = changeposX();
+                }
+                if (n4left < -20) {
+                    n4left = ((step*10)-20);
+                    n4top = changeposY();
+                    n4XX = changeposX();
+                }
+                if (n5left < -20) {
+                    n5left = ((step*10)-20);
+                    n5top = changeposY();
+                    n5XX = changeposX();
+                }
+                if (n6left < -20) {
+                    n6left = ((step*10)-20);
+                    n6top = changeposY();
+                    n6XX = changeposX();
+                }
+                if (n7left < -20) {
+                    n7left = ((step*10)-20);
+                    n7top = changeposY();
+                    n7XX = changeposX();
+                }
+                if (n8left < -20) {
+                    n8left = ((step*10)-20);
+                    n8top = changeposY();
+                    n8XX = changeposX();
+                }
+                if (n9left < -20) {
+                    n9left = ((step*10)-20);
+                    n9top = changeposY();
+                    n9XX = changeposX();
+                }
+                if (n10left < -20) {
+                    n10left = ((step*10)-20);
+                    n10top = changeposY();
+                    n10XX = changeposX();
+                }
+                
+                n1left = n1left - 1;
+                n2left = n2left - 1;
+                n3left = n3left - 1;
+                n4left = n4left - 1;
+                n5left = n5left - 1;
+                n6left = n6left - 1;
+                n7left = n7left - 1;
+                n8left = n8left - 1;
+                n9left = n9left - 1;
+                n10left = n10left - 1;
+                
+                n1.style.marginLeft = (n1left + n1XX) + "vh";
+                n1.style.marginTop = n1top + "vh";
+                
+                n2.style.marginLeft = (n2left + n2XX) + "vh";
+                n2.style.marginTop = n2top + "vh";
+                
+                n3.style.marginLeft = (n3left + n3XX) + "vh";
+                n3.style.marginTop = n3top + "vh";
+                
+                n4.style.marginLeft = (n4left + n4XX) + "vh";
+                n4.style.marginTop = n4top + "vh";
+                
+                n5.style.marginLeft = (n5left + n5XX) + "vh";
+                n5.style.marginTop = n5top + "vh";
+                
+                n6.style.marginLeft = (n6left + n6XX) + "vh";
+                n6.style.marginTop = n6top + "vh";
+                
+                n7.style.marginLeft = (n7left + n7XX) + "vh";
+                n7.style.marginTop = n7top + "vh";
+                
+                n8.style.marginLeft = (n8left + n8XX) + "vh";
+                n8.style.marginTop = n8top + "vh";
+                
+                n9.style.marginLeft = (n9left + n9XX) + "vh";
+                n9.style.marginTop = n9top + "vh";
+                
+                n10.style.marginLeft = (n10left + n10XX) + "vh";
+                n10.style.marginTop = n10top + "vh";
+                
+                    
+            }
+        }, 1000 / fps)
+        
+        skul.onclick = function() 
+        {
+            fr++;
+            if (fr == 4) alert('FRIEND?');
+        };
+    </script>
+    
+</body>
+</html>
